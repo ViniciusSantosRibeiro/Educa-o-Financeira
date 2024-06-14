@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educação Financeira</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        body{
+            text-align: center;
+        }
+        .main{
+            margin: 30px auto;
+            background-color: rgb(255, 255, 255);
+            border-radius: 60px;
+            font-weight: bold;
+            width: 500px;
+            padding-top: 1px;
+            height: 520px;
+            box-shadow: 5px 0px 15px 0px #555555;
+        }
+
+        button{
+            border-radius: 20px;
+            margin-top: 20px;
+            padding: 9px;
+            padding-left: 90px;
+            padding-right: 90px;
+            border: none;
+            box-shadow: 1px 0px 5px 0px #555555;
+            color: black;
+            background-color: white;
+            font-weight: bold;
+            transition: ease 0.3s;
+        }
+
+        button:hover{
+            color: white;
+            background-color: rgb(10, 104, 245);
+            font-weight: bold;
+            transition: ease 0.5s;
+            padding-left: 115px;
+            padding-right: 115px;
+        }
+
+        input{
+            padding: 9px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 1px 0px 5px 0px #555555;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        #year{
+            border-radius: 20px;
+            border: none;
+            color: white;
+            padding: 20px;
+            margin: 30px;
+        }
+
+        label{
+            font-size: 20px;
+        }
+
+        p{
+            margin: 10px auto;
+            text-align: center;
+            width: 470px;
+            padding: 10px;
+            font-weight: bolder;
+            box-shadow: 1px 0px 5px 0px #a1a1a1;
+            border-radius: 20px;
+            border: none;
+            color: rgb(112, 112, 112);
+        }
+    </style>
+</head>
+<body>
+    <section class="main">
+        <img width="94" height="94" src="https://img.icons8.com/3d-fluency/94/coins.png" alt="coins"/>
+        <h1>Método 50 30 e 20</h1>
+
+        <form>
+            <label for="fSalario">Salário Atual:</label>
+            <input type="number" id="fSalario" name="fSalario"><br>
+            <button type="submit" onclick="calculatePercent()">Calcular</button>
+        </form>
+
+        <form class="result">
+            <h3 id="r50"></h3>
+            <h3 id="r30">Digite um valor...</h3>
+            <h3 id="r20"></h3>
+            <h3 id="year"></h3>
+        </form>
+    </section>
+    <p class="animate__animated animate__fadeInUp">Criado por Vinícius Santos Ribeiro</p>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event){
+            event.preventDefault();});
+
+        var result50Text = document.querySelector('#r50');
+        var result30Text = document.querySelector('#r30');
+        var result20Text = document.querySelector('#r20');
+        var resultOfYear = document.querySelector('#year');
+
+        function calculatePercent(){
+            if (document.getElementById("fSalario").value == "") {
+                alert("Precisa-se um valor!");
+                return false;
+            }
+
+            document.getElementById('year').style.backgroundColor = 'rgb(10, 104, 245)';
+            
+            var p50 = (document.getElementById("fSalario").value / 100) * 50;
+            var p30 = (document.getElementById("fSalario").value / 100) * 30;
+            var p20 = (document.getElementById("fSalario").value / 100) * 20;
+            var pYear = p20 * 12;
+
+            p50 = p50.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+            p30 = p30.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+            p20 = p20.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+            pYear = pYear.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+
+            result50Text.innerHTML  = `50% para necessidades essenciais: ${p50}`;
+            result30Text.innerHTML  = `30% para desejo e lazer: ${p30}`;
+            result20Text.innerHTML  = `20% para metas financeiras ou reserva: ${p20}`;
+            resultOfYear.innerHTML = `Economizando ${p20} temos o total de: ${pYear} por ano!`;
+        }
+    </script>
+</body>
+</html>
